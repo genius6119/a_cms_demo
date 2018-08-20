@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>MMWCMS</title>
+    <!-- Tell the browser to be responsive to screen width -->
+    <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+    <!-- Bootstrap 3.3.6 -->
+    <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+    <!-- Ionicons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+    <!-- Theme style -->
+    <link rel="stylesheet" href="static/dist/css/AdminLTE.min.css">
+    <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+          page. However, you can choose any other skin. Make sure you
+          apply the skin class to the body tag so the changes take effect.
+    -->
+
+    <link rel="stylesheet" href="static/dist/css/skins/_all-skins.min.css">
+    <link rel="stylesheet" href="static/plugins/datatables/dataTables.bootstrap.css">
+    <link rel="stylesheet" href="static/plugins/daterangepicker/daterangepicker.css">
+    <link rel="stylesheet" href="static/plugins/datepicker/datepicker3.css">
+    <!-- jQuery 2.2.3 -->
+    <script src="static/jquery/jquery-2.2.3.min.js"></script>
+    <!-- Bootstrap 3.3.6 -->
+    <script src="static/bootstrap/js/bootstrap.min.js"></script>
+    <!-- AdminLTE App -->
+    <script src="static/dist/js/app.min.js"></script>
+
+    <script src="static/plugins/datatables/jquery.dataTables.min.js"></script>
+    <script src="static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+    <script src="static/plugins/datepicker/bootstrap-datepicker.js"></script>
+    <script src="static/plugins/daterangepicker/moment.min.js"></script>
+    <script src="static/plugins/daterangepicker/daterangepicker.js"></script>
+    <script src="static/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+    <script src="static/js/user.js"></script>
+    <script src="static/js/ajaxurl.js"></script>
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+</head>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini">
+<style type="text/css">
+    .form-control{width:800px; height:40px}
+</style>
+<div class="wrapper">
+
+    <!-- Main Header -->
+    <header class="main-header">
+
+        <!-- Logo -->
+        <a href="main.html" class="logo">
+            <!-- mini logo for sidebar mini 50x50 pixels -->
+            <span class="logo-mini"><b>M</b>MW</span>
+            <!-- logo for regular state and mobile devices -->
+            <span class="logo-lg"><b>mmw</b>cms</span>
+        </a>
+
+        <!-- Header Navbar -->
+        <nav class="navbar navbar-static-top" role="navigation">
+            <!-- Sidebar toggle button-->
+            <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+                <span class="sr-only">Toggle navigation</span>
+            </a>
+            <!-- Navbar Right Menu -->
+            <div class="navbar-custom-menu">
+                <ul class="nav navbar-nav">
+                    <!-- Messages: style can be found in dropdown.less-->
+
+                    <!-- /.messages-menu -->
+
+                    <!-- Notifications Menu -->
+
+                    <!-- Tasks Menu -->
+
+                    <!-- User Account Menu -->
+                    <li class="dropdown user user-menu">
+                        <!-- Menu Toggle Button -->
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                            <!-- The user image in the navbar-->
+                            <span class="user_name"></span>
+                            <!-- hidden-xs hides the username on small devices so only the image appears. -->
+                            <img src="static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+                        </a>
+                        <ul class="dropdown-menu">
+                            <!-- The user image in the menu -->
+                            <li class="user-header">
+                                <img src="static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+                            </li>
+                            <!-- Menu Body -->
+
+                            <!-- Menu Footer-->
+                            <li class="user-footer">
+                                <div class="pull-left">
+                                    <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                </div>
+                                <div class="pull-right">
+                                    <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                                </div>
+                            </li>
+                        </ul>
+                    </li>
+                    <!-- Control Sidebar Toggle Button -->
+
+                </ul>
+            </div>
+        </nav>
+    </header>
+    <!-- Left side column. contains the logo and sidebar -->
+    <aside class="main-sidebar">
+
+        <!-- sidebar: style can be found in sidebar.less -->
+        <section class="sidebar">
+
+            <!-- Sidebar user panel (optional) -->
+            <div class="user-panel">
+                <div class="pull-left image">
+                    <img src="static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                </div>
+                <div class="pull-left info">
+                    <p class="user_name"></p>
+                    <!-- Status -->
+                    <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+                </div>
+            </div>
+
+            <!-- search form (Optional) -->
+
+            <!-- /.search form -->
+
+            <!-- Sidebar Menu -->
+            <ul class="sidebar-menu">
+                <li class="header">导航</li>
+                <!-- Optionally, you can add icons to the links -->
+                <li class="active"><a href="activitynews.html"><i class="fa fa-link"></i> <span>公司活动管理</span></a></li>
+                <li class="active"><a href="brand.html"><i class="fa fa-link"></i> <span>品牌管理</span></a></li>
+                <li class="active"><a href="brandshoe.html"><i class="fa fa-link"></i> <span>品牌鞋子管理</span></a></li>
+                <li class="active"><a href="position.html"><i class="fa fa-link"></i> <span>招聘岗位管理</span></a></li>
+                <li class="active"><a href="positiontype.html"><i class="fa fa-link"></i> <span>招聘岗位类型管理</span></a></li>
+                <li class="active"><a href="resource.html"><i class="fa fa-link"></i> <span>静态资源管理</span></a></li>
+
+            </ul>
+            <!-- /.sidebar-menu -->
+        </section>
+        <!-- /.sidebar -->
+    </aside>
+
+    <!-- Content Wrapper. Contains page content -->
+    <div class="content-wrapper">
+        <!-- Content Header (Page header) -->
+
+
+        <div class="box-body">
+            <form id="forms" method="post" enctype="multipart/form-data">
+                <!-- text input -->
+                <div class="form-group">
+                    <label>品牌名称</label>
+                    <input type="text" id="brand" name="brand" class="form-control" placeholder="Enter ...">
+                </div>
+                <!-- textarea -->
+                <div class="form-group">
+                    <label>品牌描述</label>
+                    <textarea class="form-control" id="describe" name="describe" rows="3" placeholder="Enter ..."></textarea>
+                </div>
+                <div class="form-group">
+                    <label>上传品牌图标</label>
+                    <input type="file" class="file" name="file" />
+                </div>
+                <div class="box-footer">
+                    <button type="button" class="btn btn-primary" onclick="post_form()">Submit</button>
+                </div>
+
+            </form>
+        </div>
+        <!-- Main content -->
+
+        <!-- /.content -->
+    </div>
+    <!-- /.content-wrapper -->
+
+    <!-- Main Footer -->
+    <footer class="main-footer">
+        <!-- To the right -->
+
+        <!-- Default to the left -->
+
+    </footer>
+
+    <!-- Control Sidebar -->
+    <aside class="control-sidebar control-sidebar-dark">
+        <!-- Create the tabs -->
+        <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+            <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+            <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+        </ul>
+        <!-- Tab panes -->
+        <div class="tab-content">
+            <!-- Home tab content -->
+
+            <!-- /.tab-pane -->
+            <!-- Stats tab content -->
+            <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+            <!-- /.tab-pane -->
+            <!-- Settings tab content -->
+            <div class="tab-pane" id="control-sidebar-settings-tab">
+                <form method="post">
+                    <h3 class="control-sidebar-heading">General Settings</h3>
+
+                    <div class="form-group">
+                        <label class="control-sidebar-subheading">
+                            Report panel usage
+                            <input type="checkbox" class="pull-right" checked>
+                        </label>
+
+                        <p>
+                            Some information about this general settings option
+                        </p>
+                    </div>
+                    <!-- /.form-group -->
+                </form>
+            </div>
+            <!-- /.tab-pane -->
+        </div>
+    </aside>
+    <!-- /.control-sidebar -->
+    <!-- Add the sidebar's background. This div must be placed
+         immediately after the control sidebar -->
+    <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+<script>
+    function post_form() {
+        //ajax请求数据
+        $.ajax({
+            type: "POST",
+            url: ajaxurl+"brand/save",
+            data: new FormData($("#forms")[0]),/**$("#forms").serialize(),*/ //传入组装的参数
+            processData: false,
+            contentType: false,
+            dataType: "json",
+            success: function () {
+                alert("添加成功！");
+                window.location.href="brand.html";
+            }
+        })
+    }
+</script>
+
+
+</body>
+</html>

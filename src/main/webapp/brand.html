@@ -1,0 +1,632 @@
+<!DOCTYPE html>
+<!--
+This is a starter template page. Use this page to start your new project from
+scratch. This page gets rid of all links and provides the needed markup only.
+-->
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <title>MMWCMS</title>
+  <!-- Tell the browser to be responsive to screen width -->
+  <meta content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no" name="viewport">
+  <!-- Bootstrap 3.3.6 -->
+  <link rel="stylesheet" href="static/bootstrap/css/bootstrap.min.css">
+  <!-- Font Awesome -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.5.0/css/font-awesome.min.css">
+  <!-- Ionicons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css">
+  <!-- Theme style -->
+  <link rel="stylesheet" href="static/dist/css/AdminLTE.min.css">
+  <!-- AdminLTE Skins. We have chosen the skin-blue for this starter
+        page. However, you can choose any other skin. Make sure you
+        apply the skin class to the body tag so the changes take effect.
+  -->
+
+  <link rel="stylesheet" href="static/dist/css/skins/_all-skins.min.css">
+  <link rel="stylesheet" href="static/plugins/datatables/dataTables.bootstrap.css">
+  <link rel="stylesheet" href="static/plugins/daterangepicker/daterangepicker.css">
+  <link rel="stylesheet" href="static/plugins/datepicker/datepicker3.css">
+  <!-- jQuery 2.2.3 -->
+  <script src="static/jquery/jquery-2.2.3.min.js"></script>
+  <!-- Bootstrap 3.3.6 -->
+  <script src="static/bootstrap/js/bootstrap.min.js"></script>
+  <!-- AdminLTE App -->
+  <script src="static/dist/js/app.min.js"></script>
+
+  <script src="static/plugins/datatables/jquery.dataTables.min.js"></script>
+  <script src="static/plugins/datatables/dataTables.bootstrap.min.js"></script>
+  <script src="static/plugins/datepicker/bootstrap-datepicker.js"></script>
+  <script src="static/plugins/daterangepicker/moment.min.js"></script>
+  <script src="static/plugins/daterangepicker/daterangepicker.js"></script>
+  <script src="static/plugins/datepicker/locales/bootstrap-datepicker.zh-CN.js"></script>
+  <script src="static/js/user.js"></script>
+  <script src="static/js/ajaxurl.js"></script>
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/html5shiv/3.7.3/html5shiv.min.js"></script>
+  <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+  <![endif]-->
+</head>
+<style type="text/css">
+  td{
+    word-wrap:break-word;word-break:break-all;
+  }
+</style>
+<!--
+BODY TAG OPTIONS:
+=================
+Apply one or more of the following classes to get the
+desired effect
+|---------------------------------------------------------|
+| SKINS         | skin-blue                               |
+|               | skin-black                              |
+|               | skin-purple                             |
+|               | skin-yellow                             |
+|               | skin-red                                |
+|               | skin-green                              |
+|---------------------------------------------------------|
+|LAYOUT OPTIONS | fixed                                   |
+|               | layout-boxed                            |
+|               | layout-top-nav                          |
+|               | sidebar-collapse                        |
+|               | sidebar-mini                            |
+|---------------------------------------------------------|
+-->
+<body class="hold-transition skin-blue sidebar-mini">
+<div class="wrapper">
+
+  <!-- Main Header -->
+  <header class="main-header">
+
+    <!-- Logo -->
+    <a href="main.html" class="logo">
+      <!-- mini logo for sidebar mini 50x50 pixels -->
+      <span class="logo-mini"><b>M</b>MW</span>
+      <!-- logo for regular state and mobile devices -->
+      <span class="logo-lg"><b>mmw</b>cms</span>
+    </a>
+
+    <!-- Header Navbar -->
+    <nav class="navbar navbar-static-top" role="navigation">
+      <!-- Sidebar toggle button-->
+      <a href="#" class="sidebar-toggle" data-toggle="offcanvas" role="button">
+        <span class="sr-only">Toggle navigation</span>
+      </a>
+      <!-- Navbar Right Menu -->
+      <div class="navbar-custom-menu">
+        <ul class="nav navbar-nav">
+          <!-- Messages: style can be found in dropdown.less-->
+
+          <!-- /.messages-menu -->
+
+          <!-- Notifications Menu -->
+
+          <!-- Tasks Menu -->
+
+          <!-- User Account Menu -->
+          <li class="dropdown user user-menu">
+            <!-- Menu Toggle Button -->
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+              <!-- The user image in the navbar-->
+              <span class="user_name"></span>
+              <!-- hidden-xs hides the username on small devices so only the image appears. -->
+              <img src="static/dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
+            </a>
+            <ul class="dropdown-menu">
+              <!-- The user image in the menu -->
+              <li class="user-header">
+                <img src="static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+
+
+              </li>
+              <!-- Menu Body -->
+
+              <!-- Menu Footer-->
+              <li class="user-footer">
+                <div class="pull-left">
+                  <a href="#" class="btn btn-default btn-flat">Profile</a>
+                </div>
+                <div class="pull-right">
+                  <a href="#" class="btn btn-default btn-flat">Sign out</a>
+                </div>
+              </li>
+            </ul>
+          </li>
+          <!-- Control Sidebar Toggle Button -->
+
+        </ul>
+      </div>
+    </nav>
+  </header>
+  <!-- Left side column. contains the logo and sidebar -->
+  <aside class="main-sidebar">
+
+    <!-- sidebar: style can be found in sidebar.less -->
+    <section class="sidebar">
+
+      <!-- Sidebar user panel (optional) -->
+      <div class="user-panel">
+        <div class="pull-left image">
+          <img src="static/dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+        </div>
+        <div class="pull-left info">
+          <p class="user_name"></p>
+          <!-- Status -->
+          <a href="#"><i class="fa fa-circle text-success"></i> Online</a>
+        </div>
+      </div>
+
+      <!-- search form (Optional) -->
+
+      <!-- /.search form -->
+
+      <!-- Sidebar Menu -->
+      <ul class="sidebar-menu">
+        <li class="header">导航</li>
+        <!-- Optionally, you can add icons to the links -->
+        <li class="active"><a href="activitynews.html"><i class="fa fa-link"></i> <span>公司活动管理</span></a></li>
+        <li class="active"><a href="brand.html"><i class="fa fa-link"></i> <span>品牌管理</span></a></li>
+        <li class="active"><a href="brandshoe.html"><i class="fa fa-link"></i> <span>品牌鞋子管理</span></a></li>
+        <li class="active"><a href="position.html"><i class="fa fa-link"></i> <span>招聘岗位管理</span></a></li>
+        <li class="active"><a href="positiontype.html"><i class="fa fa-link"></i> <span>招聘岗位类型管理</span></a></li>
+        <li class="active"><a href="resource.html"><i class="fa fa-link"></i> <span>静态资源管理</span></a></li>
+
+      </ul>
+      <!-- /.sidebar-menu -->
+    </section>
+    <!-- /.sidebar -->
+  </aside>
+
+  <!-- Content Wrapper. Contains page content -->
+  <div class="content-wrapper">
+    <!-- Content Header (Page header) -->
+    <section class="content-header">
+      <h1>
+        旗下鞋子品牌
+      </h1>
+      <ol class="breadcrumb">
+        <li><a href="#"><i class="fa fa-dashboard"></i> Level</a></li>
+        <li class="active">Here</li>
+      </ol>
+    </section>
+
+
+    <!-- Main content -->
+    <section class="content">
+
+
+      <div class="box">
+        <div class="box-search">
+          <form onSubmit="return false;" id="activityQueryForm">
+            <div class="form-inline">
+              <label>状态</label>
+              <select class="form-control" name="isDelete" id="isDelete">
+                <option value="">全部</option>
+                <option value="0">正常</option>
+                <option value="1">待删</option>
+              </select>
+              <label>品牌名称</label>
+              <input type="text" name="brandName" id="brandName" class="form-control">
+
+              <button type="submit" class="btn btn-primary" onclick="activityQuery()">查询</button>
+            </div>
+          </form>
+        </div>
+
+        <!-- /.box-header -->
+        <!-- /.box-header -->
+        <div class="box-body">
+          <table id="activity_grid" class="table table-bordered table-striped">
+            <thead>
+            <tr>
+              <th>序号</th>
+              <th>id</th>
+              <th>品牌</th>
+              <th>描述</th>
+              <th>图片路径</th>
+              <th>是否需要删除</th>
+              <th>操作</th>
+            </tr>
+            </thead>
+          </table>
+        </div>
+        <div id="grid_pager"></div>
+        <!-- /.box-body -->
+      </div>
+      <div id="toolbar" class="btn-group">
+        <button id="btn_add" type="button" class="btn btn-default" onclick="location.href='addbrand.html'">
+          <span class="glyphicon glyphicon-plus"  aria-hidden="true"></span>新增
+        </button>
+
+
+      </div>
+      <!-- /.box -->
+
+    </section>
+    <!-- /.content -->
+  </div>
+  <!-- /.content-wrapper -->
+
+  <!-- Main Footer -->
+  <footer class="main-footer">
+    <!-- To the right -->
+
+    <!-- Default to the left -->
+
+  </footer>
+
+  <!-- Control Sidebar -->
+  <aside class="control-sidebar control-sidebar-dark">
+    <!-- Create the tabs -->
+    <ul class="nav nav-tabs nav-justified control-sidebar-tabs">
+      <li class="active"><a href="#control-sidebar-home-tab" data-toggle="tab"><i class="fa fa-home"></i></a></li>
+      <li><a href="#control-sidebar-settings-tab" data-toggle="tab"><i class="fa fa-gears"></i></a></li>
+    </ul>
+    <!-- Tab panes -->
+    <div class="tab-content">
+      <!-- Home tab content -->
+
+      <!-- /.tab-pane -->
+      <!-- Stats tab content -->
+      <div class="tab-pane" id="control-sidebar-stats-tab">Stats Tab Content</div>
+      <!-- /.tab-pane -->
+      <!-- Settings tab content -->
+      <div class="tab-pane" id="control-sidebar-settings-tab">
+        <form method="post">
+          <h3 class="control-sidebar-heading">General Settings</h3>
+
+          <div class="form-group">
+            <label class="control-sidebar-subheading">
+              Report panel usage
+              <input type="checkbox" class="pull-right" checked>
+            </label>
+
+            <p>
+              Some information about this general settings option
+            </p>
+          </div>
+          <!-- /.form-group -->
+        </form>
+      </div>
+      <!-- /.tab-pane -->
+    </div>
+  </aside>
+  <!-- /.control-sidebar -->
+  <!-- Add the sidebar's background. This div must be placed
+       immediately after the control sidebar -->
+  <div class="control-sidebar-bg"></div>
+</div>
+<!-- ./wrapper -->
+
+<!-- REQUIRED JS SCRIPTS -->
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" onsubmit="return check_form() ">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">
+          &times;
+        </button>
+        <h4 class="modal-title" id="myModalLabel">
+          修改
+        </h4>
+      </div>
+      <div class="modal-body">
+        <div class="form-group">
+          <label>品牌ID</label>
+          <input type="text" id="mBrandId"  class="form-control" >
+        </div>
+        <div class="form-group">
+          <label>品牌名称</label>
+          <input type="text" id="mBrandName"  class="form-control" >
+        </div>
+        <div class="form-group">
+          <label>品牌描述</label>
+          <input type="text" id="mDescribe"  class="form-control" >
+        </div>
+        <label>是否需要删除</label>
+        <select class="form-control"  id="mIsDelete">
+          <option ></option>
+          <option value="0">不需要</option>
+          <option value="1">需要</option>
+        </select>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-default" data-dismiss="modal">关闭
+        </button>
+        <button type="button" class="btn btn-primary" id="msubmit" onclick="check_form()">
+          提交更改
+        </button>
+      </div>
+    </div><!-- /.modal-content -->
+  </div><!-- /.modal -->
+</div>
+
+<script>
+    //Date range as a button
+    $('#rangeDate').daterangepicker(
+        {
+            locale: {
+                applyLabel: '确定',
+                cancelLabel: '取消',
+                fromLabel: '起始时间',
+                toLabel: '结束时间',
+                customRangeLabel: '自定义',
+                daysOfWeek: ['日', '一', '二', '三', '四', '五', '六'],
+                monthNames: ['一月', '二月', '三月', '四月', '五月', '六月',
+                    '七月', '八月', '九月', '十月', '十一月', '十二月'],
+                firstDay: 1,
+                format:"YYYY-MM-DD",
+                separator:"/",
+            },
+
+            ranges: {
+                '今天': [moment()],
+                '昨天': [moment().subtract(1, 'days')],
+                '最近七天': [moment().subtract(6, 'days'), moment()],
+                '最近30天': [moment().subtract(29, 'days'), moment()],
+                '本月': [moment().startOf('month'), moment().endOf('month')],
+                '上月': [moment().subtract(1, 'month').startOf('month'), moment().subtract(1, 'month').endOf('month')]
+            },
+            startDate: moment().startOf('month'),
+            endDate: moment().endOf('month')
+        }
+    );
+
+    Date.prototype.format = function (fmt) {
+        var o = {
+            "M+": this.getMonth() + 1,                 //月份
+            "d+": this.getDate(),                    //日
+            "h+": this.getHours(),                   //小时
+            "m+": this.getMinutes(),                 //分
+            "s+": this.getSeconds(),                 //秒
+            "q+": Math.floor((this.getMonth() + 3) / 3), //季度
+            "S": this.getMilliseconds()             //毫秒
+        };
+        if (/(y+)/.test(fmt)) {
+            fmt = fmt.replace(RegExp.$1, (this.getFullYear() + "").substr(4 - RegExp.$1.length));
+        }
+        for (var k in o) {
+            if (new RegExp("(" + k + ")").test(fmt)) {
+                fmt = fmt.replace(RegExp.$1, (RegExp.$1.length == 1) ? (o[k]) : (("00" + o[k]).substr(("" + o[k]).length)));
+            }
+        }
+        return fmt;
+    }
+
+    function formToJson(form) {
+        var result = {};
+        var fieldArray = $('#' + form).serializeArray();
+        for (var i = 0; i < fieldArray.length; i++) {
+            var field = fieldArray[i];
+            if (field.name in result) {
+                result[field.name] += ',' + field.value;
+            } else {
+                result[field.name] = field.value;
+            }
+        }
+        return result;
+    }
+    //Date picker
+    $('#activityDate').datepicker({
+        autoclose: true,
+        language: 'zh-CN',
+        todayHighlight: true
+    });
+
+    var week_CN = ["周一", "周二", "周三", "周四", "周五", "周六", "周日"]
+
+    var table;
+
+
+
+
+    function activityQuery() {
+        table.ajax.reload();
+    }
+
+
+    $(function () {
+        //提示信息
+        $.fn.dataTable.ext.errMode = 'none';
+
+        var lang = {
+            "sProcessing": "处理中...",
+            "sLengthMenu": "每页 _MENU_ 项",
+            "sZeroRecords": "没有匹配结果",
+            "sInfo": "当前显示第 _START_ 至 _END_ 项，共 _TOTAL_ 项。",
+            "sInfoEmpty": "当前显示第 0 至 0 项，共 0 项",
+            "sInfoFiltered": "(由 _MAX_ 项结果过滤)",
+            "sInfoPostFix": "",
+            "sSearch": "搜索:",
+            "sUrl": "",
+            "sEmptyTable": "表中数据为空",
+            "sLoadingRecords": "载入中...",
+            "sInfoThousands": ",",
+            "oPaginate": {
+                "sFirst": "首页",
+                "sPrevious": "上页",
+                "sNext": "下页",
+                "sLast": "末页",
+                "sJump": "跳转"
+            },
+            "oAria": {
+                "sSortAscending": ": 以升序排列此列",
+                "sSortDescending": ": 以降序排列此列"
+            }
+        };
+
+        //初始化表格
+        table = $("#activity_grid")
+            .on('error.dt', function (e, settings, techNote, message) {
+                console.warn(message)
+            }).dataTable({
+                language: lang, //提示信息
+                autoWidth: false, //禁用自动调整列宽
+                stripeClasses: ["odd", "even"], //为奇偶行加上样式，兼容不支持CSS伪类的场合
+                processing: true, //隐藏加载提示,自行处理
+                serverSide: true, //启用服务器端分页
+                searching: false, //禁用原生搜索
+                orderMulti: false, //启用多列排序
+                order: [], //取消默认排序查询,否则复选框一列会出现小箭头
+                ordering:false,
+                sortable: true, //是否启用排序
+                sortOrder: "asc", //排序方式
+                renderer: "bootstrap", //渲染样式：Bootstrap和jquery-ui
+                pagingType: "simple_numbers", //分页样式：simple,simple_numbers,full,full_numbers
+                columnDefs: [{
+                    "targets": 'nosort', //列的样式名
+                    "orderable": false //包含上样式名‘nosort'的禁止排序
+                }],
+                ajax: function (data, callback, settings) {
+                    //封装请求参数
+                    var param = formToJson("activityQueryForm");
+                    param.pageSize = data.length;//页面显示记录条数，在页面显示每页显示多少项的时候
+                    param.start = data.start;//开始的记录序号
+                    param.currentPage = (data.start / data.length) + 1;//当前页码
+                    param.isDelete=$("#isDelete").val();
+                    param.brand=$("#brandName").val();
+                    //console.log(param);
+                    //ajax请求数据
+                    $.ajax({
+                        type: "GET",
+                        url: ajaxurl+"brand/findByCondition",
+                        cache: false, //禁用缓存
+                        data: param, //传入组装的参数
+                        dataType: "json",
+                        success: function (result) {
+                            console.log(result);
+                            //console.log(result);
+                            //setTimeout仅为测试延迟效果
+                            setTimeout(function () {
+                                //封装返回数据
+                                var returnData = {};
+                                returnData.draw = data.startRow;//这里直接自行返回了draw计数器,应该由后台返回
+                                returnData.recordsTotal = result.totalRows;//返回数据全部记录
+                                returnData.recordsFiltered = result.totalRows;//后台不实现过滤功能，每次查询均视作全部结果
+                                returnData.data = result.items;//返回的数据列表
+
+                                //此时的数据需确保正确无误，异常判断应在执行此回调前自行处理完毕
+                                callback(returnData);
+                            }, 200);
+                        }
+                    });
+                },
+                //列表表头字段
+                columns: [
+                    {   "data": "seq","width":"5%",
+                        render: function (data, type, full,row_col) {
+                            return row_col.row+1;
+                        }
+                    },
+                    {
+                        "data": "id","width":"5%"
+                    },
+                    {
+                        "data": "brand","width":"10%"
+                    },
+                    {
+                        "data": "describe","width":"40%"
+                    },
+                    {
+                        "data": "iconUrl","width":"15%"
+                    },
+                    {
+                        "data": "isDelete","width":"10%",
+                        render: function (data, type, full) {
+                            if(data==0){
+                                return "<span style='color: green'>不需要</span>";
+                            }else{
+                                return "<span style='color: red'>待删除</span>";
+                            }
+                        }
+                    }
+                    ,
+                    {
+                        "data": "操作列","width":"15%",
+                        render: function (data, type, full) {
+                            if(full.isDelete==1){
+                                return  '<button type="button" id="change" class="btn btn-info" data-toggle="modal" data-target="#myModal">修改</button> ' +
+                                    '<button type="button" class="btn btn-info" id="deleteNews" style="background-color: red;border-color: red">删除</button>'
+                            }else {
+                                return  '<button type="button" id="change" class="btn btn-info"  data-toggle="modal" data-target="#myModal" >修改</button>'
+                            }
+                        }
+                    }
+                ]
+            })
+            .api();
+
+        // 删除
+        $("#activity_grid tbody").on("click", "#deleteNews", function () {
+            {
+                if(confirm("确定要删除吗？")){
+                    var row = $("table#activity_grid tr").index($(this).closest("tr"));
+                    //获取某列（从0列开始计数）的值
+                    var id = $("table#activity_grid").find("tr").eq(row).find("td").eq(1).text();
+                    $.ajax({
+                        type: "POST",
+                        url: ajaxurl+"brand/delete",
+                        cache: false, //禁用缓存
+                        data: {id:id}, //传入组装的参数
+                        dataType: "json",
+                        success:function () {
+                            alert("删除成功");
+                            activityQuery();
+                        }
+                    })
+                }
+            }
+        })
+
+        //修改
+        $("#activity_grid tbody").on("click", "#change", function () {
+            {
+                var row = $("table#activity_grid tr").index($(this).closest("tr"));
+                //获取某列（从0列开始计数）的值
+                var id = $("table#activity_grid").find("tr").eq(row).find("td").eq(1).text();
+                var name = $("table#activity_grid").find("tr").eq(row).find("td").eq(2).text();
+                var describe = $("table#activity_grid").find("tr").eq(row).find("td").eq(3).text();
+                $("#mBrandId").val(id);
+                $("#mBrandName").val(name);
+                $("#mDescribe").val(describe);
+
+            }
+        })
+        //此处需调用api()方法,否则返回的是JQuery对象而不是DataTables的API对象
+    });
+
+
+</script>
+
+<script>
+    function check_form() {
+        var param = formToJson("activityQueryForm");
+        param.id=$("#mBrandId").val();
+        param.brand=$("#mBrandName").val();
+        param.describe=$("#mDescribe").val();
+        param.isDelete=$("#mIsDelete").val();
+        //ajax请求数据
+        $.ajax({
+            type: "POST",
+            url: ajaxurl+"brand/update",
+            cache: false, //禁用缓存
+            data: param, //传入组装的参数
+            dataType: "json",
+            success: function () {
+                alert("修改成功!");
+                $('#myModal').modal('hide');
+                activityQuery();
+            }
+        })
+    }
+
+</script>
+<!-- Optionally, you can add Slimscroll and FastClick plugins.
+     Both of these plugins are recommended to enhance the
+     user experience. Slimscroll is required when using the
+     fixed layout. -->
+</body>
+</html>

@@ -1,0 +1,266 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qimu.mybatis.dao.PositionTypeMapper" >
+  <resultMap id="BaseResultMap" type="cn.qimu.mybatis.model.PositionType" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="position_type_name" property="positionTypeName" jdbcType="VARCHAR" />
+    <result column="position_type_classify" property="positionTypeClassify" jdbcType="INTEGER" />
+    <result column="position_select_icon" property="positionSelectIcon" jdbcType="VARCHAR" />
+    <result column="position_icon" property="positionIcon" jdbcType="VARCHAR" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, position_type_name, position_type_classify,position_icon,position_select_icon, is_delete
+  </sql>
+  <select id="countByCondition" resultType="int"  >
+    select
+    count(0)
+    from position_type
+    where
+    id>0
+    <if test="typeName !=null and typeName !=''">
+      AND position_type_name like CONCAT('%',#{typeName},'%')
+    </if>
+    <if test="isDelete != null">
+      AND is_delete=#{isDelete}
+    </if>
+  </select>
+  <select id="selectTypePage" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from position_type
+    where
+    id>0
+    <if test="isDelete != null">
+      AND is_delete=#{isDelete}
+    </if>
+    <if test="typeName !=null and typeName !=''">
+      AND position_type_name like CONCAT('%',#{typeName},'%')
+    </if>
+    LIMIT  #{startRow} , #{pageSize}
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qimu.mybatis.model.PositionTypeExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from position_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from position_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectNameByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    position_type_name
+    from position_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectIconByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select
+    position_icon
+    from position_type
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from position_type
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qimu.mybatis.model.PositionTypeExample" >
+    delete from position_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qimu.mybatis.model.PositionType" >
+    insert into position_type (id, position_type_name,position_type_classify, position_icon, position_select_icon,
+      is_delete)
+    values (#{id,jdbcType=INTEGER}, #{positionTypeName,jdbcType=VARCHAR}, #{positionTypeClassify,jdbcType=INTEGER},#{positionIcon,jdbcType=VARCHAR}, #{positionSelectIcon,jdbcType=VARCHAR}
+      #{isDelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qimu.mybatis.model.PositionType" >
+    insert into position_type
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="positionTypeName != null" >
+        position_type_name,
+      </if>
+      <if test="positionTypeClassify != null" >
+        position_type_classify,
+      </if>
+      <if test="positionIcon != null" >
+      position_icon,
+    </if><if test="positionSelectIcon != null" >
+      position_select_icon,
+    </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="positionTypeName != null" >
+        #{positionTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionTypeClassify != null" >
+        #{positionTypeClassify,jdbcType=INTEGER},
+      </if>
+      <if test="positionIcon != null" >
+        #{positionIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="positionSelectIcon != null" >
+        #{positionSelectIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qimu.mybatis.model.PositionTypeExample" resultType="java.lang.Integer" >
+    select count(*) from position_type
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update position_type
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionTypeName != null" >
+        position_type_name = #{record.positionTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionTypeClassify != null" >
+        position_type_classify = #{record.positionTypeClassify,jdbcType=INTEGER},
+      </if>
+      <if test="record.positionSelectIcon != null" >
+        position_icon = #{record.positionSelectIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionIcon != null" >
+        position_icon = #{record.positionIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update position_type
+    set id = #{record.id,jdbcType=INTEGER},
+      position_type_name = #{record.positionTypeName,jdbcType=VARCHAR},
+      position_type_classify = #{record.positionTypeClassify,jdbcType=INTEGER},
+      position_select_icon = #{record.positionSelectIcon,jdbcType=VARCHAR},
+      position_icon = #{record.positionIcon,jdbcType=VARCHAR},
+      is_delete = #{record.isDelete,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qimu.mybatis.model.PositionType" >
+    update position_type
+    <set >
+      <if test="positionTypeName != null" >
+        position_type_name = #{positionTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="positionTypeClassify != null" >
+        position_type_classify = #{positionTypeClassify,jdbcType=INTEGER},
+      </if>
+      <if test="positionSelectIcon != null" >
+        position_select_icon = #{positionSelectIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="positionIcon != null" >
+        position_icon = #{positionIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qimu.mybatis.model.PositionType" >
+    update position_type
+    set position_type_name = #{positionTypeName,jdbcType=VARCHAR},
+      position_type_classify = #{positionTypeClassify,jdbcType=INTEGER},
+      position_select_icon = #{positionSelectIcon,jdbcType=VARCHAR},
+      position_icon = #{positionIcon,jdbcType=VARCHAR},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

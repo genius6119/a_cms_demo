@@ -1,0 +1,6 @@
+/*分页*/
+ .page{  padding:0px;overflow:hidden;clear:both;}
+ .page div{border-left:1px solid #DFDFDF; overflow:hidden;}
+ .page span,.page a{width:auto; overflow:hidden;float:left; height:28px; line-height:28px; padding:0px 15px;background:#fff; border:1px solid #DFDFDF; border-left:none; font-size:12px;}
+ .page .current{ background:#FAFAFA; color:#f63;}
+ 

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xmlns:aop="http://www.springframework.org/schema/aop" xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:tx="http://www.springframework.org/schema/tx" xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop-4.1.xsd
+		http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.1.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.1.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.1.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-2.5.xsd ">
+
+	<!-- 自动扫描 -->
+	<context:component-scan base-package="cn.qimu">
+		<!-- 不扫描带有@Controller注解的类。因为这些类已经随容器启动时，在spring-mvc中扫描过一遍了 -->
+		<context:exclude-filter type="annotation"
+			expression="org.springframework.stereotype.Controller" />
+	</context:component-scan>
+	
+	<!-- 引入配置文件，这里实现了PropertyPlaceholderConfigurer读取配置文件 -->
+	<bean class="cn.qimu.utils.PropertyConfigurer">
+		<property name="locations">
+			<list>
+				<value>classpath:config.properties</value>
+				<value>classpath:jdbc.properties</value>
+			</list>
+		</property>
+	</bean>
+
+
+
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driver}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+		<!-- 初始化连接大小 -->
+		<property name="initialSize" value="${jdbc.initialSize}"></property>
+		<!-- 连接池最大数量 -->
+		<property name="maxActive" value="${jdbc.maxActive}"></property>
+		<!-- 连接池最大空闲 -->
+		<property name="maxIdle" value="${jdbc.maxIdle}"></property>
+		<!-- 连接池最小空闲 -->
+		<property name="minIdle" value="${jdbc.minIdle}"></property>
+		<!-- 获取连接最大等待时间 -->
+		<property name="maxWait" value="${jdbc.maxWait}"></property>
+		<!-- 验证连接有效性 -->
+		<property name="validationQuery" value="select 1"></property>
+	</bean>
+
+	<!-- DAO接口所在包名，Spring会自动查找其下的类 -->
+	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+		<property name="basePackage" value="cn.qimu.dao cn.qimu.mybatis.dao cn.qimu.codegenerator.dao" />
+		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
+	</bean>
+
+	<!-- 事务管理 ，配置在 application 中，只有 Service 中的 transaction 生效，Controller中不会生效；
+		若配置在 spring-mvc.xml 中，那么 spring-mvc.xml 上下文，包括 Controller 中的 Transaction 也会生效 -->
+	<bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<tx:annotation-driven transaction-manager="transactionManager" />
+
+	<!-- 声明式事务管理 -->
+	<!-- <tx:advice id="txAdvice" transaction-manager="transactionManager"> 
+		<tx:attributes> <tx:method name="insert*" propagation="REQUIRED" /> <tx:method 
+		name="update*" propagation="REQUIRED" /> <tx:method name="edit*" propagation="REQUIRED" 
+		/> <tx:method name="save*" propagation="REQUIRED" /> <tx:method name="batch*" 
+		propagation="REQUIRED" /> <tx:method name="add*" propagation="REQUIRED" /> 
+		<tx:method name="new*" propagation="REQUIRED" /> <tx:method name="set*" propagation="REQUIRED" 
+		/> <tx:method name="remove*" propagation="REQUIRED" /> <tx:method name="delete*" 
+		propagation="REQUIRED" /> <tx:method name="del*" propagation="REQUIRED" /> 
+		<tx:method name="change*" propagation="REQUIRED" /> <tx:method name="check*" 
+		propagation="REQUIRED" /> <tx:method name="mm*" propagation="REQUIRES_NEW" 
+		/> <tx:method name="get*" propagation="REQUIRED" read-only="true" /> <tx:method 
+		name="find*" propagation="REQUIRED" read-only="true" /> <tx:method name="load*" 
+		propagation="REQUIRED" read-only="true" /> </tx:attributes> </tx:advice> -->
+
+	<!-- config spring aop -->
+	<!-- 配置事务切面 -->
+	<!-- <aop:config proxy-target-class="true"> <aop:pointcut id="allServiceMethod" 
+		expression="execution(* cn.qimu.service.*.*(..))" /> <aop:advisor advice-ref="txAdvice" 
+		pointcut-ref="allServiceMethod" /> </aop:config> -->
+
+	<!-- spring和MyBatis整合，不需要mybatis的配置映射文件 -->
+	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource" />
+		<!-- 自动扫描mapping.xml文件 -->
+		<property name="mapperLocations">
+			<list>
+				<value>classpath:cn/qimu/mapping/*.xml</value>
+				<value>classpath:cn/qimu/mybatis/mapping/*.xml</value>
+				<value>classpath:cn/qimu/codegenerator/mapping/*.xml</value>
+			</list>
+		</property>
+		<!-- 分页插件 -->
+		<property name="plugins">
+			<array>
+				<!-- 用于分页的第三方,不需要可以不导入 -->
+				<bean class="com.github.pagehelper.PageHelper">
+					<property name="properties">
+						<value>
+							dialect=mysql
+							reasonable=true
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property>
+	</bean>
+	<!-- 注入 SqlSessionTemplate 对象，主要用于生成 SqlSessionFactory 对象-->
+	<bean id="sqlSessionTemplate" class="org.mybatis.spring.SqlSessionTemplate" scope="prototype">  
+        <constructor-arg index="0" ref="sqlSessionFactory"></constructor-arg>  
+    </bean>
+    
+    <import resource="classpath:quartzJob.xml"/>
+	<!--shiro-->
+	<import resource="spring-shiro.xml"/>
+</beans>  

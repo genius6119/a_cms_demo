@@ -1,0 +1,170 @@
+package ${package}.service.impl;
+
+import java.util.Date;
+import java.util.List;
+import javax.annotation.Resource;
+import org.apache.commons.lang3.StringUtils;
+import org.springframework.stereotype.Service;
+import com.github.pagehelper.PageHelper;
+import org.springframework.transaction.annotation.Transactional;
+import java.util.HashMap;
+import ${package}.common.ApiStrings;
+import ${package}.exception.BusinessException;
+import ${package}.mybatis.dao.${className}Mapper;
+import ${package}.mybatis.model.${className};
+import ${package}.mybatis.model.${className}Example;
+import ${package}.mybatis.model.${className}Example.Criteria;
+import ${package}.service.${className}Service;
+import ${package}.utils.UUIDUtil;
+
+@Service
+public class ${className}ServiceImpl implements ${className}Service {
+	
+	@Resource
+	protected ${className}Mapper ${classname}Mapper;
+
+	@Override
+	public long save${className}(${className} ${classname}) {
+		if (${classname} == null) {
+			throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+			
+	#if ("${pk.attrType}" == "String")
+	${classname}.set${pk.attrName}(UUIDUtil.getUUID());		
+	#end
+	return ${classname}Mapper.insertSelective(${classname});
+	}
+
+	@Override
+	public long delete${className}(${pk.attrType} ${pk.attrname}) {
+	#if ("${pk.attrType}" == "String")
+	if (StringUtils.isBlank(${pk.attrname})) {
+	#else
+	if (${pk.attrname} == null)	{
+	#end 					 
+		throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+		return ${classname}Mapper.deleteByPrimaryKey(${pk.attrname});
+	}
+	
+	@Override
+	public long batchDelete${className}(${className} ${classname}) {
+		if (${classname} == null) {
+			throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+		${className}Example example = create${className}Example(${classname});
+		return ${classname}Mapper.deleteByExample(example);
+	}
+
+	@Override
+	public long update${className}(${className} ${classname}) {
+	#if ("${pk.attrType}" == "String")
+	if (${classname} == null || StringUtils.isBlank(${classname}.get${pk.attrName}())) {
+	#else
+	if (${classname} == null || ${classname}.get${pk.attrName}() == null) {
+	#end 
+		throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+
+		return ${classname}Mapper.updateByPrimaryKeySelective(${classname});
+	}
+	
+	@Override
+	public long update${className}ByCondtion(${className} ${classname}, ${className} conditonObject) {
+		if (${classname} == null || conditonObject == null) {
+			throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+		${className}Example example = create${className}Example(${classname});
+		return ${classname}Mapper.updateByExample(${classname}, example);
+	}
+
+	@Override
+	public ${className} get${className}(${pk.attrType} ${pk.attrname}) {
+	#if ("${pk.attrType}" == "String")
+	if (StringUtils.isBlank(${pk.attrname})) {
+	#else
+	if (${pk.attrname} == null)	{
+	#end 		
+			throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+	    }
+		return ${classname}Mapper.selectByPrimaryKey(${pk.attrname});
+	}
+	
+	@Override
+	public List<${className}> get${className}(${className} ${classname}) {
+		if (${classname} == null) {
+			throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+		${className}Example example = create${className}Example(${classname});
+		return ${classname}Mapper.selectByExample(example);
+	}
+
+	@Override
+	public List<${className}> list${className}ByPage(${className} ${classname}) {
+		if (${classname} == null) {
+			throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+		
+		${className}Example example = create${className}Example(${classname});
+		
+		// orderBy 如果orderBy 为 null和空，那么不排序，反之按传入条件排序
+		if (!StringUtils.isBlank(${classname}.getOrder()))
+			example.setOrderByClause(${classname}.getOrder());
+		PageHelper.startPage(${classname}.getCurPage(), ${classname}.getSize(), false);
+		return ${classname}Mapper.selectByExample(example);
+	}
+	
+	@Override
+	public List<${className}> listAll${className}(${className} ${classname}) {
+		if (${classname} == null) {
+			throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+		${className}Example example = create${className}Example(${classname});
+		return ${classname}Mapper.selectByExample(example);
+	}
+
+	@Override
+	public long count${className}(${className} ${classname}) {
+		if (${classname} == null) {
+			throw new BusinessException(ApiStrings.INVALID_PARAMETERS);
+		}
+		${className}Example example = create${className}Example(${classname});
+		return ${classname}Mapper.countByExample(example);
+	}
+	
+	@Transactional
+	@Override
+	public HashMap<String, Object> countNList${className}ByPage(${className} ${classname}) {
+		HashMap<String, Object> map = new HashMap<String, Object>();
+		List<${className}> data = list${className}ByPage(${classname});
+		long count = count${className}(${classname});
+		map.put("data", data);
+		map.put("count", count);
+		return map;
+	}
+	
+	@Override
+	public ${className}Example create${className}ExampleByEqualCondition(${className} ${classname}) {
+		${className}Example example = new ${className}Example();
+		Criteria criteria = example.createCriteria();
+	#foreach($col in ${columns})
+	#if ("${col.attrName}" == "IsDeleted")
+	
+		if (${classname}.get${col.attrName}() != null) {
+			criteria.and${col.attrName}EqualTo(${classname}.get${col.attrName}());
+		} else {
+			criteria.and${col.attrName}EqualTo(false);
+		}
+	#else
+	
+		if (${classname}.get${col.attrName}() != null) {
+			criteria.and${col.attrName}EqualTo(${classname}.get${col.attrName}());
+		}
+	#end
+	#end
+	
+		return example;
+	}
+	
+
+}

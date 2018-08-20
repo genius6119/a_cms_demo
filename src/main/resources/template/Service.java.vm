@@ -1,0 +1,88 @@
+package ${package}.service;
+
+import ${package}.mybatis.model.${className};
+import ${package}.mybatis.model.${className}Example;
+import java.util.List;
+import java.util.HashMap;
+
+/**
+ * ${comments}
+ * @author
+ * @date ${datetime}
+ */
+public interface ${className}Service {
+
+	/**
+	 * 保存对象，实际为向数据库 insert 数据
+	 * @param ${classname} 插入的实体对象
+	 */
+	long save${className}(${className} ${classname});
+	
+	/**
+	 * 根据主键删除对象
+	 * @param ${pk.attrname}
+	 */
+	long delete${className}(${pk.attrType} ${pk.attrname});
+	
+	/**
+	 * 根据对象批量删除对象，使用 batchDelete 这个名称，而没有直接用 delete的原因是为了防止误用
+	 * @param ${pk.attrname}
+	 */
+	long batchDelete${className}(${className} ${classname});
+	
+	/**
+	 * 根据主键更新数据，用于更新单条数据
+	 * @param ${classname}
+	 */
+	long update${className}(${className} ${classname});
+	
+	/**
+	 * 根据条件更新数据，主要用于批量修改数据
+	 * @param updateData 需要更新的数据值
+	 * @param conditonObject 更新的条件值，对应的就是 sql中where条件
+	 */
+	long update${className}ByCondtion(${className} updateData, ${className} conditonObject);
+	
+	/**
+	 * 根据主键来获取对象
+	 * @param ${pk.attrname}
+	 */
+	${className} get${className}(${pk.attrType} ${pk.attrname});
+	
+	/**
+	 * 根据条件来获取对象，主要用于获取批量数据
+	 * @param ${classname}
+	 */
+	List<${className}> get${className}(${className} ${classname});
+	
+	/**
+	 * 分页获取数据列表数据；
+	 * @param ${classname} 获取数据的 where 条件
+	 */
+	List<${className}> list${className}ByPage(${className} ${classname});
+	
+	/**
+	 * 获取数据列表数据
+	 * @param ${classname} 获取数据的 where 条件
+	 */
+	List<${className}> listAll${className}(${className} ${classname});
+	
+	/**
+	 * 获取数据总量
+	 * @param ${classname} 获取数据的 where 条件
+	 */
+	long count${className}(${className} ${classname});
+	
+	/**
+	 * 分页获取数据列表数据；并返回数据总量
+	 * @param ${classname} 获取数据的 where 条件
+	 */
+	HashMap<String, Object> countNList${className}ByPage(${className} ${classname});
+	
+	/**
+	 * 根据对象来构建 MyBatis 的Example对象
+	 * @param ${classname} 获取数据的 where 条件
+	 */
+	${className}Example create${className}Example(${className} ${classname});
+	
+}

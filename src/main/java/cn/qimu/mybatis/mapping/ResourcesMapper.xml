@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="cn.qimu.mybatis.dao.ResourcesMapper" >
+  <resultMap id="BaseResultMap" type="cn.qimu.mybatis.model.Resources" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="resource_name" property="resourceName" jdbcType="VARCHAR" />
+    <result column="resource_type" property="resourceType" jdbcType="INTEGER" />
+    <result column="resource_url" property="resourceUrl" jdbcType="VARCHAR" />
+    <result column="resource_page" property="resourcePage" jdbcType="VARCHAR" />
+    <result column="group" property="group" jdbcType="INTEGER" />
+    <result column="is_delete" property="isDelete" jdbcType="BIT" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, resource_name, resource_type, resource_url, resource_page, `group`, is_delete
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="cn.qimu.mybatis.model.ResourcesExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    'true' as QUERYID,
+    <include refid="Base_Column_List" />
+    from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+  </select>
+  <select id="countByCondition" resultType="int"  >
+    select
+    count(0)
+    from resources
+    where
+    id>0
+
+    <if test="resourceType !=null and resourceType !=''">
+      AND resource_type=#{resourceType,jdbcType=INTEGER}
+    </if>
+    <if test="page != null and page != ''">
+      AND resource_page=#{page}
+    </if>
+    <if test="group != null and group != ''">
+      AND `group`=#{group}
+    </if>
+    <if test="isDelete != null">
+      AND is_delete=#{isDelete}
+    </if>
+  </select>
+  <select id="selectResourcesPage" resultMap="BaseResultMap"  >
+    select
+    <include refid="Base_Column_List" />
+    from resources
+    where
+    id>0
+    <if test="isDelete != null">
+      AND is_delete=#{isDelete}
+    </if>
+    <if test="resourceType !=null and resourceType !=''">
+      AND resource_type=#{resourceType,jdbcType=INTEGER}
+    </if>
+    <if test="page != null and page != ''">
+      AND resource_page=#{page}
+    </if>
+    <if test="group != null and group != ''">
+      AND `group`=#{group}
+    </if>
+    LIMIT  #{startRow} , #{pageSize}
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from resources
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectUrlByPrimaryKey" resultType="java.lang.String" >
+    select
+    resource_url
+    from resources
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <select id="selectSamePlaceResourcesByPrimaryKey" resultMap="BaseResultMap" >
+  SELECT
+	  resource_url
+  FROM
+      resources
+  WHERE
+      resource_page=#{0}
+  AND
+      `group`=#{1}
+</select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from resources
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="cn.qimu.mybatis.model.ResourcesExample" >
+    delete from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="cn.qimu.mybatis.model.Resources" >
+    insert into resources (id, resource_name, resource_type, 
+      resource_url, resource_page, `group`, 
+      is_delete)
+    values (#{id,jdbcType=INTEGER}, #{resourceName,jdbcType=VARCHAR}, #{resourceType,jdbcType=INTEGER}, 
+      #{resourceUrl,jdbcType=VARCHAR}, #{resourcePage,jdbcType=VARCHAR}, #{group,jdbcType=INTEGER}, 
+      #{isDelete,jdbcType=BIT})
+  </insert>
+  <insert id="insertSelective" parameterType="cn.qimu.mybatis.model.Resources" >
+    insert into resources
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resourceName != null" >
+        resource_name,
+      </if>
+      <if test="resourceType != null" >
+        resource_type,
+      </if>
+      <if test="resourceUrl != null" >
+        resource_url,
+      </if>
+      <if test="resourcePage != null" >
+        resource_page,
+      </if>
+      <if test="group != null" >
+        `group`,
+      </if>
+      <if test="isDelete != null" >
+        is_delete,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="resourceName != null" >
+        #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceUrl != null" >
+        #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcePage != null" >
+        #{resourcePage,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        #{group,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        #{isDelete,jdbcType=BIT},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="cn.qimu.mybatis.model.ResourcesExample" resultType="java.lang.Integer" >
+    select count(*) from resources
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update resources
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceName != null" >
+        resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourceType != null" >
+        resource_type = #{record.resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="record.resourceUrl != null" >
+        resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resourcePage != null" >
+        resource_page = #{record.resourcePage,jdbcType=VARCHAR},
+      </if>
+      <if test="record.group != null" >
+        `group` = #{record.group,jdbcType=INTEGER},
+      </if>
+      <if test="record.isDelete != null" >
+        is_delete = #{record.isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update resources
+    set id = #{record.id,jdbcType=INTEGER},
+      resource_name = #{record.resourceName,jdbcType=VARCHAR},
+      resource_type = #{record.resourceType,jdbcType=INTEGER},
+      resource_url = #{record.resourceUrl,jdbcType=VARCHAR},
+      resource_page = #{record.resourcePage,jdbcType=VARCHAR},
+      `group` = #{record.group,jdbcType=INTEGER},
+      is_delete = #{record.isDelete,jdbcType=BIT}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="cn.qimu.mybatis.model.Resources" >
+    update resources
+    <set >
+      <if test="resourceName != null" >
+        resource_name = #{resourceName,jdbcType=VARCHAR},
+      </if>
+      <if test="resourceType != null" >
+        resource_type = #{resourceType,jdbcType=INTEGER},
+      </if>
+      <if test="resourceUrl != null" >
+        resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="resourcePage != null" >
+        resource_page = #{resourcePage,jdbcType=VARCHAR},
+      </if>
+      <if test="group != null" >
+        `group` = #{group,jdbcType=INTEGER},
+      </if>
+      <if test="isDelete != null" >
+        is_delete = #{isDelete,jdbcType=BIT},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="cn.qimu.mybatis.model.Resources" >
+    update resources
+    set resource_name = #{resourceName,jdbcType=VARCHAR},
+      resource_type = #{resourceType,jdbcType=INTEGER},
+      resource_url = #{resourceUrl,jdbcType=VARCHAR},
+      resource_page = #{resourcePage,jdbcType=VARCHAR},
+      `group` = #{group,jdbcType=INTEGER},
+      is_delete = #{isDelete,jdbcType=BIT}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>
